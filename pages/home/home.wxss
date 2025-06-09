@@ -1,0 +1,236 @@
+/* 头部样式 */
+.header {
+  background: linear-gradient(135deg, #4a6bff, #8c52ff);
+  color: white;
+  padding: 20rpx 30rpx 40rpx;
+  border-radius: 0 0 40rpx 40rpx;
+}
+
+.search-box {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 60rpx;
+  padding: 20rpx 30rpx;
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.search-box input {
+  background: transparent;
+  border: none;
+  color: white;
+  flex: 1;
+  padding: 10rpx 20rpx;
+  font-size: 28rpx;
+}
+
+.placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ad-banner {
+  background: white;
+  border-radius: 30rpx;
+  padding: 30rpx;
+  margin: 30rpx 0;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.1);
+}
+
+.ad-icon {
+  background: linear-gradient(135deg, #ff9d6c, #ff6b8b);
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 30rpx;
+}
+
+.ad-icon image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.ad-content {
+  flex: 1;
+}
+
+.ad-title {
+  color: #333;
+  font-size: 32rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.ad-desc {
+  color: #666;
+  font-size: 24rpx;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.ad-tag {
+  background: #e6f7ff;
+  color: #1890ff;
+  border-radius: 8rpx;
+  padding: 4rpx 16rpx;
+  font-size: 24rpx;
+  display: inline-block;
+  margin-top: 10rpx;
+}
+
+/* 导航分类 */
+.nav-tabs {
+  white-space: nowrap;
+  background: white;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.tab {
+  display: inline-block;
+  text-align: center;
+  padding: 20rpx 40rpx;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+
+.tab.active {
+  color: #4a6bff;
+  font-weight: bold;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 6rpx;
+  background: #4a6bff;
+  border-radius: 4rpx;
+}
+
+/* 工具列表 */
+.tools-section {
+  padding: 40rpx;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.section-heading {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.more {
+  color: #4a6bff;
+  font-size: 26rpx;
+}
+
+.tool-card {
+  background: white;
+  border-radius: 30rpx;
+  overflow: hidden;
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.05);
+  margin-bottom: 30rpx;
+  display: flex;
+}
+
+.tool-icon {
+  width: 140rpx;
+  height: 140rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tool-icon image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.tool-content {
+  flex: 1;
+  padding: 30rpx;
+}
+
+.tool-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.tool-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.tool-size {
+  font-size: 24rpx;
+  color: #999;
+  background: #f5f7fa;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.tool-desc {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.tool-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tool-version {
+  font-size: 24rpx;
+  color: #4a6bff;
+  background: rgba(74, 107, 255, 0.1);
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+}
+
+.btn-view {
+  background: #4a6bff;
+  color: white;
+  border: none;
+  padding: 10rpx 20rpx;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  margin: 0;
+  line-height: normal;
+  /* width: 120rpx !important; */
+}
+
+/* 微博信息 */
+.weibo-info {
+  text-align: center;
+  padding: 30rpx;
+  color: #999;
+  font-size: 26rpx;
+}
+
+/* 工具颜色 */
+.camera { background: linear-gradient(135deg, #ff6b8b, #ff9d6c); }
+.wechat { background: linear-gradient(135deg, #2ecc71, #1abc9c); }
+.music { background: linear-gradient(135deg, #3498db, #9b59b6); }
+.poem { background: linear-gradient(135deg, #f39c12, #e74c3c); }

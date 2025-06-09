@@ -1,0 +1,66 @@
+<!-- 顶部区域 -->
+<view class="header">
+  <view class="search-box">
+    <icon type="search" size="16" color="#fff"></icon>
+    <input placeholder="搜索资源..." placeholder-class="placeholder" />
+  </view>
+  
+  <!-- 广告横幅 -->
+  <!-- <view class="ad-banner">
+    <view class="ad-icon">
+      <image src="https://bkimg.cdn.bcebos.com/pic/cb8065380cd791235f3c35afa3345982b3b78009?x-bce-process=image/format,f_auto/resize,m_lfit,limit_1,w_277" mode="aspectFit"></image>
+    </view>
+    <view class="ad-content">
+      <text class="ad-title">官方大流量卡</text>
+      <text class="ad-desc">免费包邮 官方可查 全国通用</text>
+      <text class="ad-desc">高速网络 省心省力更自由</text>
+      <view class="ad-tag">正规运营商</view>
+    </view>
+  </view> -->
+</view>
+<!-- 分类导航 -->
+<scroll-view scroll-x class="nav-tabs">
+  <view 
+    class="tab {{currentTab == 0 ? 'active' : ''}}" 
+    bindtap="switchTab" data-index="0"
+  >近期更新</view>
+  <view 
+    class="tab {{currentTab == 1 ? 'active' : ''}}" 
+    bindtap="switchTab" data-index="1"
+  >实用软件</view>
+  <view 
+    class="tab {{currentTab == 2 ? 'active' : ''}}" 
+    bindtap="switchTab" data-index="2"
+  >影视音乐</view>
+  <view 
+    class="tab {{currentTab == 3 ? 'active' : ''}}" 
+    bindtap="switchTab" data-index="3"
+  >万能资料</view>
+</scroll-view>
+
+<!-- 工具列表 -->
+<view class="tools-section">
+  <view class="section-title">
+    <text class="section-heading">热门工具</text>
+  </view>
+  
+  <!-- 工具卡片 -->
+  <block wx:for="{{tools}}" wx:key="index">
+    <view class="tool-card">
+      <view class="tool-icon {{item.iconClass}}">
+        <image src="{{item.iconPath}}" mode="aspectFit"></image>
+      </view>
+      <view class="tool-content">
+        <view class="tool-header">
+          <text class="tool-title">{{item.title}}</text>
+          <text class="tool-size">{{item.size}}</text>
+        </view>
+        <text class="tool-desc">{{item.desc}}</text>
+        <view class="tool-footer">
+          <text class="tool-version">{{item.version}}</text>
+          <button class="btn-view" bindtap="viewDetail" data-id="{{item.id}}">查看</button>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

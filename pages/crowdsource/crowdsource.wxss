@@ -1,0 +1,101 @@
+.container {
+  padding: 20rpx;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+}
+
+.page-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+  text-align: center;
+  color: #333;
+}
+
+.search-bar {
+  margin-bottom: 30rpx;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.project-item {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  display: flex;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+.project-item:active {
+  transform: scale(0.98);
+}
+
+.project-image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+  background-color: #eee; /* Placeholder color */
+}
+
+.project-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-description {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 15rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.project-progress {
+  margin-bottom: 10rpx;
+}
+
+.project-meta {
+  font-size: 24rpx;
+  color: #888;
+  display: flex;
+  justify-content: space-between;
+}
+
+.empty-state {
+  text-align: center;
+  color: #999;
+  padding: 100rpx 0;
+  font-size: 28rpx;
+}
+
+.load-more,
+.no-more-data {
+  text-align: center;
+  padding: 30rpx 0;
+  font-size: 26rpx;
+  color: #888;
+}
+
+/* 确保 Vant Weapp 样式能正确应用 */
+/* 如果您使用了 van-search, van-progress, van-button, 请确保已正确引入 */

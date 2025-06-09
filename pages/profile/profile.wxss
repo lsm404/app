@@ -1,0 +1,48 @@
+.profile-container {
+  padding-bottom: 20rpx;
+}
+
+.user-info-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx 20rpx;
+  background-color: #f8f8f8; /* 或者主题色 */
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  margin-bottom: 20rpx;
+  border: 2rpx solid #eee;
+}
+
+.nickname {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.nickname van-icon {
+  margin-left: 10rpx;
+}
+
+.user-id {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 20rpx;
+}
+
+.van-cell-group {
+  margin-bottom: 20rpx;
+}
+
+.logout-button-container {
+  padding: 20rpx 30rpx;
+  margin-top: 40rpx;
+}

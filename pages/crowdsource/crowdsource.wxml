@@ -1,0 +1,47 @@
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <van-search
+      value="{{ searchQuery }}"
+      placeholder="搜索众筹项目"
+      show-action
+      bind:search="onSearch"
+      bind:cancel="onCancelSearch"
+      bind:change="onSearchChange"
+    />
+  </view>
+
+  <!-- 项目列表 -->
+  <view class="project-list" wx:if="{{ projects.length > 0 }}">
+    <block wx:for="{{ projects }}" wx:key="id">
+      <view class="project-item" bindtap="navigateToProjectDetail" data-id="{{ item.id }}">
+        <image class="project-image" src="{{ item.imageUrl || '/images/placeholder.png' }}" mode="aspectFill"></image>
+        <view class="project-info">
+          <view class="project-name">{{ item.name }}</view>
+          <view class="project-description">{{ item.description }}</view>
+          <view class="project-progress">
+            <van-progress percentage="{{ item.progress }}" show-pivot pivot-text="{{item.progress}}%" color="#2563EB" />
+          </view>
+          <view class="project-meta">
+            <text>目标: {{ item.goalAmount }}</text>
+            <text>已筹: {{ item.currentAmount }}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="empty-state" wx:else>
+    <text>暂无众筹项目</text>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{ projects.length > 0 && !noMoreData }}">
+    <van-button type="default" size="small" bind:click="loadMoreProjects" loading="{{ isLoadingMore }}">
+      {{ isLoadingMore ? '加载中...' : '加载更多' }}
+    </van-button>
+  </view>
+  <view class="no-more-data" wx:if="{{ noMoreData && projects.length > 0 }}">
+    <text>没有更多了</text>
+  </view>
+
+</view>

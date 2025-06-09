@@ -1,0 +1,26 @@
+<view class="profile-container">
+  <view class="user-info-card">
+    <image class="avatar" src="{{userInfo.avatarUrl || '/images/tabbar/profile-active.png'}}" mode="aspectFill"></image>
+    <view class="nickname">{{userInfo.nickName || '点击登录'}}
+      <van-icon name="arrow" wx:if="{{!userInfo.nickName}}" />
+    </view>
+    <view class="user-id" wx:if="{{userInfo.userId}}">ID: {{userInfo.userId}}</view>
+    <van-button wx:if="{{!userInfo.nickName}}" size="small" type="primary" bind:tap="login">登录/注册</van-button>
+  </view>
+
+  <van-cell-group title="常用功能">
+    <van-cell title="我的提问" is-link url="/pages/my-questions/my-questions" icon="records" />
+    <van-cell title="我的回答" is-link url="/pages/my-answers/my-answers" icon="chat-o" />
+    <van-cell title="我的收藏" is-link url="/pages/my-collections/my-collections" icon="star-o" />
+    <van-cell title="浏览历史" is-link url="/pages/history/history" icon="clock-o" />
+  </van-cell-group>
+
+  <van-cell-group title="其他">
+    <van-cell title="设置" is-link url="/pages/settings/settings" icon="setting-o" />
+    <van-cell title="关于我们" is-link url="/pages/about/about" icon="info-o" />
+  </van-cell-group>
+
+  <view class="logout-button-container" wx:if="{{userInfo.nickName}}">
+    <van-button type="danger" block bind:tap="logout">退出登录</van-button>
+  </view>
+</view>

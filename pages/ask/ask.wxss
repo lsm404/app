@@ -1,0 +1,71 @@
+.container {
+  padding: 30rpx;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+}
+
+.page-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 40rpx;
+  text-align: center;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 30rpx;
+  background-color: #fff;
+  padding: 20rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 15rpx;
+  font-weight: 500;
+}
+
+/* Vant Field Customization */
+.form-group .van-cell {
+  padding: 0; /* Remove default padding if needed */
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.custom-tag {
+  margin-right: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.tags-container .van-field {
+  flex: 1;
+  min-width: 200rpx; /* Ensure input field has enough space */
+}
+
+.add-tag-button {
+  margin-left: 10rpx !important; /* Override Vant's default margin */
+}
+
+.tag-suggestion {
+  margin-top: 15rpx;
+  font-size: 24rpx;
+  color: #888;
+}
+
+.suggested-tag-item {
+  margin-right: 10rpx !important;
+  margin-bottom: 10rpx !important;
+  cursor: pointer;
+}
+
+.submit-button-container {
+  margin-top: 50rpx;
+}

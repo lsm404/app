@@ -1,0 +1,83 @@
+<view class="container">
+  <form bindsubmit="submitQuestion">
+    <view class="form-group">
+      <label class="form-label">问题标题</label>
+      <van-field
+        value="{{ title }}"
+        bind:input="onTitleInput"
+        placeholder="请输入您的问题标题 (例如：如何学习小程序开发？)"
+        clearable
+        maxlength="100"
+        show-word-limit
+        required
+      />
+    </view>
+
+    <view class="form-group">
+      <label class="form-label">问题描述 (选填)</label>
+      <van-field
+        value="{{ description }}"
+        bind:input="onDescriptionInput"
+        type="textarea"
+        placeholder="请详细描述您的问题背景、遇到的困难等，有助于他人更好地解答。"
+        autosize
+        maxlength="1000"
+        show-word-limit
+      />
+    </view>
+
+    <view class="form-group">
+      <label class="form-label">相关标签 (选填，最多5个)</label>
+      <view class="tags-container">
+        <block wx:for="{{ tags }}" wx:key="index">
+          <van-tag 
+            type="primary" 
+            size="large" 
+            closeable 
+            bind:close="onRemoveTag" 
+            data-index="{{index}}"
+            custom-class="custom-tag"
+          >
+            {{ item }}
+          </van-tag>
+        </block>
+        <van-field
+          wx:if="{{ tags.length < 5 }}"
+          value="{{ currentTag }}"
+          bind:input="onCurrentTagInput"
+          placeholder="输入标签后按回车或点添加"
+          bind:confirm="onAddTagByConfirm"
+          clearable
+          maxlength="10"
+        />
+        <van-button 
+          wx:if="{{ currentTag && tags.length < 5 }}" 
+          size="small" 
+          type="primary" 
+          icon="plus" 
+          bind:click="onAddTagByButton" 
+          custom-class="add-tag-button"
+        >
+          添加
+        </van-button>
+      </view>
+      <view class="tag-suggestion" wx:if="{{ suggestedTags.length > 0 }}">
+        <text>推荐标签：</text>
+        <block wx:for="{{ suggestedTags }}" wx:key="index">
+          <van-tag type="default" plain bind:click="onSelectSuggestedTag" data-tag="{{item}}" custom-class="suggested-tag-item">{{item}}</van-tag>
+        </block>
+      </view>
+    </view>
+
+    <view class="form-group">
+      <label class="form-label">悬赏积分 (选填)</label>
+      <van-stepper value="{{ rewardPoints }}" bind:change="onRewardChange" min="0" max="1000" step="10" />
+    </view>
+
+    <view class="submit-button-container">
+      <van-button type="info" size="large" form-type="submit" block disabled="{{ isSubmitting }}" loading="{{ isSubmitting }}">
+        {{ isSubmitting ? '提交中...' : '提交问题' }}
+      </van-button>
+    </view>
+  </form>
+</view>
