@@ -45,7 +45,7 @@
   </view>
   
   <!-- 工具卡片 -->
-  <block wx:for="{{tools}}" wx:key="index">
+  <block wx:for="{{tools}}" wx:key="id">
     <view class="tool-card">
       <view class="tool-icon {{item.iconClass}}">
         <image src="{{item.iconPath}}" mode="aspectFit"></image>
@@ -57,10 +57,30 @@
         </view>
         <text class="tool-desc">{{item.desc}}</text>
         <view class="tool-footer">
+          <view class="version-container">
           <text class="tool-version">{{item.version}}</text>
+          </view>
           <button class="btn-view" bindtap="viewDetail" data-id="{{item.id}}">查看</button>
         </view>
       </view>
     </view>
   </block>
+
+  <!-- 加载更多提示 -->
+  <view class="load-more-container">
+    <view wx:if="{{loading}}" class="loading-tip">
+      <view class="loading-icon"></view>
+      <text>加载中...</text>
+    </view>
+    <view wx:elif="{{loadingMore}}" class="loading-tip">
+      <view class="loading-icon"></view>
+      <text>加载更多...</text>
+    </view>
+    <view wx:elif="{{!hasMore && tools.length > 0}}" class="no-more-tip">
+      <text>已加载全部数据</text>
+    </view>
+    <view wx:elif="{{tools.length === 0 && !loading}}" class="empty-tip">
+      <text>暂无数据</text>
+    </view>
+  </view>
 </view>

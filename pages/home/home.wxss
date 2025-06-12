@@ -147,6 +147,7 @@
   box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.05);
   margin-bottom: 30rpx;
   display: flex;
+  min-height: 180rpx;
 }
 
 .tool-icon {
@@ -165,6 +166,9 @@
 .tool-content {
   flex: 1;
   padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .tool-header {
@@ -199,26 +203,43 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: auto;
 }
 
+/* 版本容器 - 固定宽度 */
+.version-container {
+  width: 160rpx;
+  margin-right: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+/* 版本标签 - 自适应内容 */
 .tool-version {
   font-size: 24rpx;
   color: #4a6bff;
   background: rgba(74, 107, 255, 0.1);
   padding: 6rpx 16rpx;
   border-radius: 8rpx;
+  display: inline-block;
 }
 
 .btn-view {
   background: #4a6bff;
   color: white;
   border: none;
-  padding: 10rpx 20rpx;
+  padding: 0;
   border-radius: 30rpx;
   font-size: 26rpx;
   margin: 0;
   line-height: normal;
-  /* width: 120rpx !important; */
+  width: 140rpx !important;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 320rpx !important;
 }
 
 /* 微博信息 */
@@ -234,3 +255,44 @@
 .wechat { background: linear-gradient(135deg, #2ecc71, #1abc9c); }
 .music { background: linear-gradient(135deg, #3498db, #9b59b6); }
 .poem { background: linear-gradient(135deg, #f39c12, #e74c3c); }
+
+/* 加载更多提示样式 */
+.load-more-container {
+  padding: 40rpx 0;
+  text-align: center;
+}
+
+.loading-tip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 28rpx;
+}
+
+.loading-icon {
+  width: 32rpx;
+  height: 32rpx;
+  border: 3rpx solid #f3f3f3;
+  border-top: 3rpx solid #4a6bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 16rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.no-more-tip {
+  color: #999;
+  font-size: 26rpx;
+  padding: 20rpx 0;
+}
+
+.empty-tip {
+  color: #999;
+  font-size: 28rpx;
+  padding: 60rpx 0;
+}
