@@ -47,7 +47,8 @@
   <!-- 工具卡片 -->
   <block wx:for="{{tools}}" wx:key="id">
     <view class="tool-card">
-      <view class="tool-icon {{item.iconClass}}">
+      <!-- <view class="tool-icon {{item.iconClass}}"> -->
+        <view class="tool-icon">
         <image src="{{item.iconPath}}" mode="aspectFit"></image>
       </view>
       <view class="tool-content">
