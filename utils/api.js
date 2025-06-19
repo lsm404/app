@@ -2,12 +2,13 @@
  * @Author: lishengmin shengminfang@foxmail.com
  * @Date: 2025-06-09 10:13:35
  * @LastEditors: lishengmin shengminfang@foxmail.com
- * @LastEditTime: 2025-06-12 10:48:28
+ * @LastEditTime: 2025-06-19 14:25:40
  * @FilePath: /applet/app/utils/api.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 // API配置
-const API_BASE_URL = 'https://120.46.28.146:9000';
+const API_BASE_URL = 'http://127.0.0.1:8088';
+// const API_BASE_URL = 'https://120.46.28.146:9000';
 
 // 通用请求方法
 function request(options) {
@@ -77,7 +78,7 @@ function getToolsByCategory(category = 0, page = 1, pageSize = 10) {
   return getTools(params);
 }
 
-// 搜索工具
+// 搜索工具（旧方法，基于title参数）
 function searchTools(keyword, page = 1, pageSize = 10) {
   return getTools({
     title: keyword,
@@ -86,9 +87,33 @@ function searchTools(keyword, page = 1, pageSize = 10) {
   });
 }
 
+// 专门的搜索接口（新方法，使用专门的搜索API）
+function searchToolsAdvanced(keyword, page = 1, pageSize = 10) {
+  if (!keyword || keyword.trim() === '') {
+    return Promise.reject({ code: 400, msg: '搜索关键词不能为空' });
+  }
+  
+  const queryParams = `keyword=${encodeURIComponent(keyword.trim())}&page=${page}&pageSize=${pageSize}`;
+  
+  return request({
+    url: `/api/tools/search?${queryParams}`,
+    method: 'GET'
+  });
+}
+
+// 获取分类列表
+function getCategories() {
+  return request({
+    url: '/api/categories/options',
+    method: 'GET'
+  });
+}
+
 module.exports = {
   request,
   getTools,
   getToolsByCategory,
-  searchTools
+  searchTools,
+  searchToolsAdvanced,
+  getCategories
 }; 

@@ -2,7 +2,61 @@
 <view class="header">
   <view class="search-box">
     <icon type="search" size="16" color="#fff"></icon>
-    <input placeholder="搜索资源..." placeholder-class="placeholder" />
+    <input 
+      placeholder="搜索资源..." 
+      placeholder-class="placeholder"
+      value="{{searchKeyword}}"
+      bindinput="onSearchInput"
+      bindconfirm="onSearchConfirm"
+      bindblur="onSearchBlur"
+      bindfocus="onSearchFocus"
+      confirm-type="search"
+    />
+    <!-- 清空搜索按钮 -->
+    <view wx:if="{{searchKeyword}}" class="search-clear" bindtap="clearSearch">
+      <icon type="clear" size="16" color="#fff"></icon>
+    </view>
+  </view>
+  
+  <!-- 搜索结果显示区域 -->
+  <view wx:if="{{isSearchMode}}" class="search-results">
+    <view class="search-header">
+      <text class="search-tip">搜索 "{{searchKeyword}}" 的结果 ({{searchResults.length}})</text>
+      <view class="search-close" bindtap="exitSearchMode">
+        <text>返回</text>
+      </view>
+    </view>
+    
+    <!-- 搜索结果列表 -->
+    <view wx:if="{{searchResults.length > 0}}" class="search-list">
+      <view 
+        wx:for="{{searchResults}}" 
+        wx:key="id" 
+        class="search-item"
+        bindtap="selectSearchResult"
+        data-item="{{item}}"
+      >
+        <view class="search-item-icon">
+          <image src="{{item.iconPath}}" mode="aspectFit"></image>
+        </view>
+        <view class="search-item-content">
+          <text class="search-item-title">{{item.title}}</text>
+          <text class="search-item-desc">{{item.desc}}</text>
+          <view class="search-item-info">
+            <text class="search-item-size">{{item.size}}</text>
+            <text class="search-item-category">{{item.categoryName || '未分类'}}</text>
+          </view>
+        </view>
+        <view class="search-item-arrow">
+          <text>></text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 搜索无结果 -->
+    <view wx:else class="search-empty">
+      <text>未找到相关资源</text>
+    </view>
   </view>
   
   <!-- 广告横幅 -->
@@ -20,22 +74,26 @@
 </view>
 <!-- 分类导航 -->
 <scroll-view scroll-x class="nav-tabs">
-  <view 
-    class="tab {{currentTab == 0 ? 'active' : ''}}" 
-    bindtap="switchTab" data-index="0"
-  >近期更新</view>
-  <view 
-    class="tab {{currentTab == 1 ? 'active' : ''}}" 
-    bindtap="switchTab" data-index="1"
-  >实用软件</view>
-  <view 
-    class="tab {{currentTab == 2 ? 'active' : ''}}" 
-    bindtap="switchTab" data-index="2"
-  >影视音乐</view>
-  <view 
-    class="tab {{currentTab == 3 ? 'active' : ''}}" 
-    bindtap="switchTab" data-index="3"
-  >万能资料</view>
+  <!-- 加载中状态 -->
+  <view class="tabs-loading" wx:if="{{tabsLoading}}">
+    <view class="loading-dot"></view>
+    <view class="loading-dot"></view>
+    <view class="loading-dot"></view>
+  </view>
+  <!-- 动态生成分类标签 -->
+  <block wx:if="{{!tabsLoading && categories.length > 0}}">
+    <view 
+      wx:for="{{categories}}"
+      wx:key="value"
+      class="tab {{currentTab == index ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-index="{{index}}"
+    >{{item.label}}</view>
+  </block>
+  <!-- 无分类数据时显示默认标签 -->
+  <block wx:if="{{!tabsLoading && categories.length === 0}}">
+    <view class="tab active">近期更新</view>
+  </block>
 </scroll-view>
 
 <!-- 工具列表 -->
@@ -46,7 +104,10 @@
   
   <!-- 工具卡片 -->
   <block wx:for="{{tools}}" wx:key="id">
-    <view class="tool-card">
+    <view 
+      id="tool-card-{{item.id}}" 
+      class="tool-card {{highlightedToolId == item.id ? 'highlighted' : ''}}"
+    >
       <!-- <view class="tool-icon {{item.iconClass}}"> -->
         <view class="tool-icon">
         <image src="{{item.iconPath}}" mode="aspectFit"></image>
