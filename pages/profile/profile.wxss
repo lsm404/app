@@ -1,5 +1,7 @@
 .profile-container {
   padding-bottom: 20rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
 }
 
 .user-info-card {
@@ -7,8 +9,22 @@
   flex-direction: column;
   align-items: center;
   padding: 40rpx 20rpx;
-  background-color: #f8f8f8; /* 或者主题色 */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   margin-bottom: 20rpx;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.user-info-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
 }
 
 .avatar {
@@ -16,16 +32,26 @@
   height: 160rpx;
   border-radius: 50%;
   margin-bottom: 20rpx;
-  border: 2rpx solid #eee;
+  border: 4rpx solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.avatar:active {
+  transform: scale(0.95);
 }
 
 .nickname {
   font-size: 36rpx;
   font-weight: bold;
   margin-bottom: 10rpx;
-  color: #333;
+  color: white;
   display: flex;
   align-items: center;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
 }
 
 .nickname van-icon {
@@ -34,15 +60,91 @@
 
 .user-id {
   font-size: 24rpx;
-  color: #999;
-  margin-bottom: 20rpx;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 10rpx;
+  position: relative;
+  z-index: 1;
 }
 
+.user-level {
+  font-size: 26rpx;
+  color: #FFD700;
+  margin-bottom: 30rpx;
+  padding: 8rpx 20rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 30rpx;
+  backdrop-filter: blur(10rpx);
+  position: relative;
+  z-index: 1;
+}
+
+/* 用户统计数据样式 */
+.user-stats {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0 40rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 15rpx;
+  border-radius: 20rpx;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10rpx);
+  transition: all 0.3s ease;
+  min-width: 160rpx;
+}
+
+.stat-item:active {
+  transform: translateY(-4rpx);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.stat-number {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: white;
+  line-height: 1;
+  margin-bottom: 8rpx;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.3);
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+
+/* 分组样式 */
 .van-cell-group {
   margin-bottom: 20rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
 }
 
-.logout-button-container {
-  padding: 20rpx 30rpx;
-  margin-top: 40rpx;
+/* 应用信息样式 */
+.app-info {
+  text-align: center;
+  padding: 40rpx 20rpx;
+  background: white;
+  margin: 20rpx;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.version-info {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.copyright {
+  font-size: 22rpx;
+  color: #999;
 }

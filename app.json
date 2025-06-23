@@ -24,12 +24,6 @@
         "selectedIconPath": "images/tabbar/home-active.png"
       },
       {
-        "pagePath": "pages/crowdsource/crowdsource",
-        "text": "众筹",
-        "iconPath": "images/tabbar/crowdsource.png",
-        "selectedIconPath": "images/tabbar/crowdsource-active.png"
-      },
-      {
         "pagePath": "pages/profile/profile",
         "text": "我的",
         "iconPath": "images/tabbar/profile.png",

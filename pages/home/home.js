@@ -2,7 +2,7 @@
  * @Author: lishengmin shengminfang@foxmail.com
  * @Date: 2025-05-29 15:13:42
  * @LastEditors: lishengmin shengminfang@foxmail.com
- * @LastEditTime: 2025-06-09 14:36:07
+ * @LastEditTime: 2025-06-23 10:49:58
  * @FilePath: /app/pages/home/home.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -47,6 +47,10 @@ Page({
     // 定位相关状态
     targetToolId: null, // 目标工具ID（用于搜索结果定位）
     highlightedToolId: null, // 高亮的工具ID
+    
+    // 错误信息显示
+    errorMessage: '', // 错误信息
+    showError: false, // 是否显示错误信息
   },
 
   // 切换标签
@@ -180,7 +184,7 @@ Page({
     const that = this;
     wx.showModal({
       title: '下载地址（夸克）',
-      content: 'https://example.com/download',
+      content: tool.link,
       confirmText: '复制',
       cancelText: '取消',
       success(res) {
@@ -299,7 +303,10 @@ Page({
         console.log('从缓存加载分类数据:', cachedCategories);
         this.setData({ 
           categories: cachedCategories,
-          tabsLoading: false
+          tabsLoading: false,
+          // 成功加载后清除错误信息
+          showError: false,
+          errorMessage: ''
         });
         
         // 加载第一个分类的数据
@@ -342,7 +349,10 @@ Page({
         // 更新数据
         this.setData({ 
           categories: categories,
-          tabsLoading: false
+          tabsLoading: false,
+          // 成功加载后清除错误信息
+          showError: false,
+          errorMessage: ''
         });
         
         // 缓存分类数据
@@ -371,7 +381,10 @@ Page({
         
         this.setData({ 
           categories: defaultCategories,
-          tabsLoading: false 
+          tabsLoading: false,
+          // 使用默认分类时清除之前的错误信息
+          showError: false,
+          errorMessage: ''
         });
         
         // 默认加载近期/全部更新
@@ -379,6 +392,18 @@ Page({
       }
     } catch (error) {
       console.error('获取分类失败:', error);
+      
+      // 构建详细的错误信息
+      let errorMsg = '获取分类失败: ';
+      if (error && error.msg) {
+        errorMsg += error.msg;
+      } else if (error && error.message) {
+        errorMsg += error.message;
+      } else if (typeof error === 'string') {
+        errorMsg += error;
+      } else {
+        errorMsg += JSON.stringify(error);
+      }
       
       // 出错时使用默认分类
       const defaultCategories = [
@@ -390,11 +415,13 @@ Page({
       
       this.setData({ 
         categories: defaultCategories,
-        tabsLoading: false 
+        tabsLoading: false,
+        errorMessage: errorMsg,
+        showError: true
       });
       
-              // 默认加载近期/全部更新
-        this.getToolsData(0, true);
+      // 默认加载近期/全部更新
+      this.getToolsData(0, true);
     }
   },
 
@@ -446,7 +473,10 @@ Page({
         totalCount: totalCount,
         hasMore: hasMore,
         loading: false,
-        loadingMore: false
+        loadingMore: false,
+        // 成功加载后清除错误信息
+        showError: false,
+        errorMessage: ''
       });
 
       // 如果是第一页，缓存结果
@@ -485,14 +515,28 @@ Page({
     } catch (error) {
       console.error('获取工具列表失败:', error);
       
+      // 构建详细的错误信息
+      let errorMsg = '加载失败: ';
+      if (error && error.msg) {
+        errorMsg += error.msg;
+      } else if (error && error.message) {
+        errorMsg += error.message;
+      } else if (typeof error === 'string') {
+        errorMsg += error;
+      } else {
+        errorMsg += JSON.stringify(error);
+      }
+      
       this.setData({
         loading: false,
-        loadingMore: false
+        loadingMore: false,
+        errorMessage: errorMsg,
+        showError: true
       });
 
       wx.hideLoading();
       wx.showToast({
-        title: '加载失败',
+        title: '加载失败，查看详细错误',
         icon: 'none'
       });
       
@@ -599,7 +643,10 @@ Page({
 
       this.setData({
         searchResults: resultsWithCategory,
-        searchLoading: false
+        searchLoading: false,
+        // 成功搜索后清除错误信息
+        showError: false,
+        errorMessage: ''
       });
 
       wx.hideLoading();
@@ -613,14 +660,29 @@ Page({
 
     } catch (error) {
       console.error('搜索失败:', error);
+      
+      // 构建详细的错误信息
+      let errorMsg = '搜索失败: ';
+      if (error && error.msg) {
+        errorMsg += error.msg;
+      } else if (error && error.message) {
+        errorMsg += error.message;
+      } else if (typeof error === 'string') {
+        errorMsg += error;
+      } else {
+        errorMsg += JSON.stringify(error);
+      }
+      
       this.setData({
         searchLoading: false,
-        searchResults: []
+        searchResults: [],
+        errorMessage: errorMsg,
+        showError: true
       });
 
       wx.hideLoading();
       wx.showToast({
-        title: error.msg || '搜索失败',
+        title: '搜索失败，查看详细错误',
         icon: 'none'
       });
     }
@@ -776,6 +838,14 @@ Page({
     });
     this.setData({
       targetToolId: null
+    });
+  },
+
+  // 关闭错误信息显示
+  closeError() {
+    this.setData({
+      showError: false,
+      errorMessage: ''
     });
   },
 

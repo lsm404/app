@@ -1,11 +1,23 @@
 <view class="profile-container">
   <view class="user-info-card">
-    <image class="avatar" src="{{userInfo.avatarUrl || '/images/tabbar/profile-active.png'}}" mode="aspectFill"></image>
-    <view class="nickname">{{userInfo.nickName || '点击登录'}}
-      <van-icon name="arrow" wx:if="{{!userInfo.nickName}}" />
+    <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill" bindtap="onAvatarTap"></image>
+    <view class="nickname">{{userInfo.nickName}}</view>
+    <view class="user-id">ID: {{userInfo.userId}}</view>
+    <view class="user-level">{{userInfo.level}}</view>
+    <view class="user-stats">
+      <view class="stat-item" bindtap="onStatTap" data-type="download">
+        <view class="stat-number">{{userInfo.downloadCount}}</view>
+        <view class="stat-label">下载量</view>
+      </view>
+      <view class="stat-item" bindtap="onStatTap" data-type="favorite">
+        <view class="stat-number">{{userInfo.favoriteCount}}</view>
+        <view class="stat-label">收藏</view>
+      </view>
+      <view class="stat-item" bindtap="onStatTap" data-type="share">
+        <view class="stat-number">{{userInfo.shareCount}}</view>
+        <view class="stat-label">分享</view>
+      </view>
     </view>
-    <view class="user-id" wx:if="{{userInfo.userId}}">ID: {{userInfo.userId}}</view>
-    <van-button wx:if="{{!userInfo.nickName}}" size="small" type="primary" bind:tap="login">登录/注册</van-button>
   </view>
 
   <van-cell-group title="常用功能">
@@ -20,7 +32,14 @@
     <van-cell title="关于我们" is-link url="/pages/about/about" icon="info-o" />
   </van-cell-group>
 
-  <view class="logout-button-container" wx:if="{{userInfo.nickName}}">
-    <van-button type="danger" block bind:tap="logout">退出登录</van-button>
+  <van-cell-group title="账户管理">
+    <van-cell title="个人资料" is-link icon="contact" />
+    <van-cell title="隐私设置" is-link icon="shield-o" />
+    <van-cell title="通知设置" is-link icon="bell" />
+  </van-cell-group>
+  
+  <view class="app-info">
+    <view class="version-info">版本号：v2.1.0</view>
+    <view class="copyright">© 2025 资源工具箱</view>
   </view>
 </view>

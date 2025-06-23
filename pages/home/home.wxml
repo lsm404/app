@@ -72,6 +72,16 @@
     </view>
   </view> -->
 </view>
+
+<!-- 错误信息显示 -->
+<view wx:if="{{showError}}" class="error-container">
+  <view class="error-content">
+    <icon type="warn" size="20" color="#ff4444"></icon>
+    <text class="error-text">{{errorMessage}}</text>
+    <view class="error-close" bindtap="closeError">×</view>
+  </view>
+</view>
+
 <!-- 分类导航 -->
 <scroll-view scroll-x class="nav-tabs">
   <!-- 加载中状态 -->
@@ -98,9 +108,6 @@
 
 <!-- 工具列表 -->
 <view class="tools-section">
-  <view class="section-title">
-    <text class="section-heading">热门工具</text>
-  </view>
   
   <!-- 工具卡片 -->
   <block wx:for="{{tools}}" wx:key="id">
@@ -109,7 +116,7 @@
       class="tool-card {{highlightedToolId == item.id ? 'highlighted' : ''}}"
     >
       <!-- <view class="tool-icon {{item.iconClass}}"> -->
-        <view class="tool-icon">
+      <view class="tool-icon">
         <image src="{{item.iconPath}}" mode="aspectFit"></image>
       </view>
       <view class="tool-content">
@@ -120,7 +127,7 @@
         <text class="tool-desc">{{item.desc}}</text>
         <view class="tool-footer">
           <view class="version-container">
-          <text class="tool-version">{{item.version}}</text>
+            <text class="tool-version" wx:if="{{item.version && item.version.trim() !== ''}}">{{item.version}}</text>
           </view>
           <button class="btn-view" bindtap="viewDetail" data-id="{{item.id}}">查看</button>
         </view>
